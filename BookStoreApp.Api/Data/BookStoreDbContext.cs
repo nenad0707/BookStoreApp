@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BookStoreApp.Api.Data
 {
-    public partial class BookStoreDbContext : DbContext
+    public partial class BookStoreDbContext : IdentityDbContext
     {
         public BookStoreDbContext()
         {
@@ -20,6 +21,7 @@ namespace BookStoreApp.Api.Data
         public virtual DbSet<Book> Books { get; set; } = null!;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Author>(entity =>
             {
                 entity.Property(e => e.Bio)
